@@ -1,6 +1,6 @@
-import { gql, useQuery } from '@apollo/client';
 import Image from 'next/image';
 import localFont from 'next/font/local';
+import Navbar from '@/components/Navbar';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -13,38 +13,38 @@ const geistMono = localFont({
   weight: '100 900',
 });
 
-const ALL_PLANETS = gql`
-  query AllPlanets {
-    allPlanets {
-      planets {
-        name
-        diameter
-        gravity
-      }
-    }
-  }
-`;
-
 export default function Home() {
-  const { data, loading, error } = useQuery(ALL_PLANETS);
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
-
   return (
     <div
-      className={`${geistSans.variable} ${geistMono.variable} grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
+      className={`${geistSans.variable} ${geistMono.variable} relative min-h-screen flex justify-center items-center`}
     >
-      <main className='flex flex-col gap-8 row-start-2 items-center sm:items-start'>
-        <ul>
-          {data.allPlanets.planets.map((planet: any) => (
-            <li key={planet.name}>
-              {planet.name} - Diameter: {planet.diameter}, Gravity:{' '}
-              {planet.gravity}
-            </li>
-          ))}
-        </ul>
-      </main>
+      <div className='absolute inset-0 z-0'>
+        <Image
+          src='/hero-image.webp'
+          alt='Hero image of starwars'
+          fill
+          className='object-cover'
+          priority
+        />
+      </div>
+      <div className='z-10 relative'>
+        <div className='max-w-2xl'>
+          <Image
+            className='mx-auto'
+            src='/starwars.svg'
+            alt='Logo of Starwars'
+            width={300}
+            height={300}
+          />
+        </div>
+        <div className='p-0 font-[family-name:var(--font-geist-sans)]'>
+          <p className='text-white text-center font-bold text-3xl underline underline-offset-4'>
+            DISCOVERY
+          </p>
+        </div>
+
+        <Navbar />
+      </div>
     </div>
   );
 }
