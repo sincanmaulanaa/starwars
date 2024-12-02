@@ -34,7 +34,7 @@ const Planets = ({
           setSearchTerm={setSearchTerm}
         />
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
-          {paginatedPlanets.map((planet: Planet) => (
+          {paginatedPlanets?.map((planet: Planet) => (
             <PlanetCard key={planet.name} planet={planet} />
           ))}
         </div>

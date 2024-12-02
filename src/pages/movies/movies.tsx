@@ -35,11 +35,11 @@ const Movies = ({
           setSearchTerm={setSearchTerm}
         />
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
-          {filteredMovies.map((movie: MovieEdge) => (
+          {filteredMovies?.map((movie: MovieEdge) => (
             <MovieCard key={movie.node.id} movie={movie.node} />
           ))}
         </div>
-        {pageInfo.hasNextPage && (
+        {pageInfo?.hasNextPage && (
           <div className='mt-8 text-center'>
             <Button
               onClick={handleLoadMore}

@@ -37,11 +37,11 @@ const Characters = ({
           setSearchTerm={setSearchTerm}
         />
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
-          {filteredCharacters.map((char: CharacterEdge) => (
+          {filteredCharacters?.map((char: CharacterEdge) => (
             <CharacterCard key={char.node.id} person={char.node} />
           ))}
         </div>
-        {pageInfo.hasNextPage && (
+        {pageInfo?.hasNextPage && (
           <div className='mt-8 text-center'>
             <Button
               onClick={handleLoadMore}
