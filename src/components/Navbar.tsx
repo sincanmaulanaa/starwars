@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import MenuImage from './MenuImage';
 
@@ -31,7 +30,7 @@ export default function Navbar() {
               className='bg-black/10 p-5 rounded-full transition-all duration-200 hover:shadow-sm hover:shadow-red-500'
             >
               {menu?.image}
-              <span className='text-center block font-semibold mt-2'>
+              <span className='text-center block font-semibold mt-2 text-white'>
                 {menu.name}
               </span>
             </li>

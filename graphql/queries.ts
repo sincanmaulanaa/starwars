@@ -29,3 +29,26 @@ export const GET_PLANET = gql`
     }
   }
 `;
+
+export const ALL_CHARACTERS = gql`
+  query AllCharacters($first: Int, $after: String) {
+    allPeople(first: $first, after: $after) {
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+      edges {
+        node {
+          id
+          name
+          birthYear
+          eyeColor
+          gender
+          hairColor
+          height
+          mass
+        }
+      }
+    }
+  }
+`;

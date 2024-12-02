@@ -5,21 +5,7 @@ import LoadingSpinner from '@/components/LoadingSpinner';
 import ErrorMessage from '@/components/ErrorMessage';
 import Link from 'next/link';
 import { GET_PLANET } from '../../../graphql/queries';
-
-interface PlanetData {
-  planet: {
-    id: string;
-    name: string;
-    diameter: string;
-    gravity: string;
-    population: string;
-    climate: string;
-    terrain: string;
-    surfaceWater: string;
-    rotationPeriod: string;
-    orbitalPeriod: string;
-  };
-}
+import { PlanetData } from '../../../types';
 
 const PlanetDetail: React.FC = () => {
   const router = useRouter();
