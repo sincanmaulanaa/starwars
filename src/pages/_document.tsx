@@ -6,7 +6,7 @@ export default function Document() {
       <Head>
         <meta
           name='description'
-          content='Star wars pedia, here you can find information about the movies.'
+          content='Starwars pedia, here you can find information about the movies.'
         />
         <link rel='icon' href='/starwars.svg' />
         <title>Starwars Pedia</title>
