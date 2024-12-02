@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
-import LoadingSpinner from '@/components/LoadingSpinner';
-import ErrorMessage from '@/components/ErrorMessage';
+import LoadingSpinner from '@/components/ui/LoadingSpinner';
+import ErrorMessage from '@/components/ui/ErrorMessage';
 import { ALL_CHARACTERS } from '../../../graphql/queries';
-import CharacterCard from '@/components/CharacterCard';
-import { AllPeopleData, CharacterEdge } from '../../../types';
+import { AllPeopleData, CharacterEdge } from '@/types/character';
+import Characters from './characters';
 
 const ITEMS_PER_PAGE = 9;
 
@@ -53,37 +53,14 @@ const CharactersPage: React.FC = () => {
   };
 
   return (
-    <div className='min-h-screen bg-black text-yellow-300 p-8'>
-      <h1 className='text-4xl font-bold text-center mb-8'>
-        Star Wars Characters
-      </h1>
-      <div className='max-w-4xl mx-auto'>
-        <input
-          type='text'
-          placeholder='Search characters...'
-          className='w-full p-2 mb-6 bg-gray-800 text-yellow-300 border border-yellow-300 rounded'
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setSearchTerm(e.target.value)
-          }
-          value={searchTerm}
-        />
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
-          {filteredCharacters.map((char: CharacterEdge) => (
-            <CharacterCard key={char.node.id} character={char.node} />
-          ))}
-        </div>
-        {pageInfo.hasNextPage && (
-          <div className='mt-8 text-center'>
-            <button
-              onClick={handleLoadMore}
-              className='bg-yellow-300 text-black px-4 py-2 rounded hover:bg-yellow-400 transition-colors'
-            >
-              {isNextPageLoading ? 'Loading...' : 'Load More'}
-            </button>
-          </div>
-        )}
-      </div>
-    </div>
+    <Characters
+      filteredCharacters={filteredCharacters}
+      handleLoadMore={handleLoadMore}
+      isNextPageLoading={isNextPageLoading}
+      pageInfo={pageInfo}
+      searchTerm={searchTerm}
+      setSearchTerm={setSearchTerm}
+    />
   );
 };
 
