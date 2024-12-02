@@ -1,11 +1,11 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
-import LoadingSpinner from '@/components/LoadingSpinner';
-import ErrorMessage from '@/components/ErrorMessage';
-import Link from 'next/link';
+import LoadingSpinner from '@/components/ui/LoadingSpinner';
+import ErrorMessage from '@/components/ui/ErrorMessage';
 import { GET_PLANET } from '../../../graphql/queries';
-import { PlanetData } from '../../../types';
+import { PlanetData } from '@/types/planet';
+import BackToPreviousPage from '@/components/ui/BackToPreviousPage';
 
 const PlanetDetail: React.FC = () => {
   const router = useRouter();
@@ -44,9 +44,7 @@ const PlanetDetail: React.FC = () => {
           />
         </div>
         <div className='mt-8 text-center'>
-          <Link href='/planets' className='text-blue-400 hover:text-blue-300'>
-            Back to Planets List
-          </Link>
+          <BackToPreviousPage href='/planets' title='Back to Planets List' />
         </div>
       </div>
     </div>
