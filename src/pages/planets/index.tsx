@@ -1,11 +1,10 @@
 import React, { useState, useMemo } from 'react';
-import { gql, useQuery } from '@apollo/client';
-import { AllPlanetsData, Planet } from '../../../types';
-import LoadingSpinner from '@/components/LoadingSpinner';
-import PlanetCard from '@/components/PlanetCard';
-import ErrorMessage from '@/components/ErrorMessage';
-import Pagination from '@/components/Pagination';
+import { useQuery } from '@apollo/client';
+import { AllPlanetsData, Planet } from '@/types/planet';
+import LoadingSpinner from '@/components/ui/LoadingSpinner';
+import ErrorMessage from '@/components/ui/ErrorMessage';
 import { ALL_PLANETS } from '../../../graphql/queries';
+import Planets from './planets';
 
 const ITEMS_PER_PAGE = 6;
 
@@ -32,38 +31,19 @@ const PlanetsPage: React.FC = () => {
     setCurrentPage(page);
   };
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setSearchTerm(e.target.value);
-    setCurrentPage(1);
-  };
-
   if (loading) return <LoadingSpinner />;
   if (error) return <ErrorMessage message={error.message} />;
   if (!data) return <ErrorMessage message='No data available' />;
 
   return (
-    <div className='min-h-screen bg-black text-yellow-300 p-8'>
-      <h1 className='text-4xl font-bold text-center mb-8'>Star Wars Planets</h1>
-      <div className='max-w-4xl mx-auto'>
-        <input
-          type='text'
-          placeholder='Search planets...'
-          className='w-full p-2 mb-6 bg-gray-800 text-yellow-300 border border-yellow-300 rounded'
-          onChange={handleSearch}
-          value={searchTerm}
-        />
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
-          {paginatedPlanets.map((planet: Planet) => (
-            <PlanetCard key={planet.name} planet={planet} />
-          ))}
-        </div>
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={handlePageChange}
-        />
-      </div>
-    </div>
+    <Planets
+      currentPage={currentPage}
+      handlePageChange={handlePageChange}
+      setSearchTerm={setSearchTerm}
+      paginatedPlanets={paginatedPlanets}
+      searchTerm={searchTerm}
+      totalPages={totalPages}
+    />
   );
 };
 
